@@ -1,9 +1,30 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const DotEnv = require('dotenv-webpack')
+const { DefinePlugin } = require('webpack')
 const path = require('path')
+const fs = require('fs')
 
 const IS_DEV = process.env.NODE_ENV === 'development'
+
+// text-replace any process.env.* variable at build time with the corresponding
+// value found in the .env file if it exists, or othrerwise with the environment
+// variable of the same name
+const dotEnvPath = path.join(__dirname, '.env')
+const dotEnv = fs.existsSync(dotEnvPath)
+  ? Object.fromEntries(
+      fs
+        .readFileSync(dotEnvPath, 'utf-8')
+        .split('\n')
+        .filter(v => v.includes('='))
+        .map(v => v.split('='))
+    )
+  : {}
+const env = Object.fromEntries(
+  Object.entries({ ...process.env, ...dotEnv }).map(([k, v]) => [
+    `process.env.${k}`,
+    JSON.stringify(v),
+  ])
+)
 
 module.exports = {
   mode: IS_DEV ? 'development' : 'production',
@@ -43,6 +64,6 @@ module.exports = {
       template: path.join(__dirname, 'index.html'),
     }),
     new MiniCssExtractPlugin(),
-    new DotEnv(),
+    new DefinePlugin(env),
   ],
 }
