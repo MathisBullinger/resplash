@@ -1,0 +1,26 @@
+.app {
+  --nav-size: 5rem;
+  padding-bottom: var(--nav-size);
+}
+
+.mainnav {
+  position: fixed;
+  height: var(--nav-size);
+  width: 100vw;
+  bottom: 0;
+  left: 0;
+  background-color: #3c3c3c;
+}
+
+@media (orientation: landscape) {
+  .app {
+    --nav-size: 5.63rem;
+    padding-bottom: unset;
+    padding-left: var(--nav-size);
+  }
+
+  .mainnav {
+    width: var(--nav-size);
+    height: 100vh;
+  }
+}

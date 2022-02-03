@@ -1,11 +1,17 @@
 import React from 'react'
-import Grid from 'components/masonry/Grid'
-import { usePhotos } from 'hooks/api'
+import { Routes, Route } from 'react-router-dom'
+import Home from 'screens/Home'
+import Navigation from 'components/Mainnav'
 
 const App: React.FC = () => {
-  const photos = usePhotos()
-
-  return <Grid photos={photos} />
+  return (
+    <>
+      <Navigation />
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </>
+  )
 }
 
 export default App

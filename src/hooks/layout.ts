@@ -54,7 +54,7 @@ export function useColumns(numColumns: number, photos: Photo[]) {
       if (numColumns <= columns.length || !columns.length) return newColumns
 
       // redistribute photos to newly added columns
-      while (smallest() >= columns.length) {
+      while (largest() < columns.length) {
         const from = largest()
         const to = smallest()
         const photo = newColumns[from].pop()

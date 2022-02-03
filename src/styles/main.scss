@@ -1,8 +1,16 @@
+@use './app.scss';
 @use './masonry.scss';
 
 :root {
-  background-color: #111;
+  background-color: #2b2b2b;
   font-size: 16px;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
 body {
