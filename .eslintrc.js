@@ -1,6 +1,11 @@
 module.exports = {
   root: true,
-  extends: ['react-app', 'eslint:recommended', 'prettier'],
+  extends: [
+    'eslint:recommended',
+    'prettier',
+    'react-app',
+    'plugin:react/recommended',
+  ],
   plugins: ['@typescript-eslint'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -17,5 +22,7 @@ module.exports = {
     '@typescript-eslint/require-await': 'warn',
     'no-duplicate-imports': 'off',
     '@typescript-eslint/no-duplicate-imports': ['warn'],
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'warn',
   },
 }

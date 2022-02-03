@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const DotEnv = require('dotenv-webpack')
 const path = require('path')
 
 const IS_DEV = process.env.NODE_ENV === 'development'
@@ -16,6 +17,10 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    modules: [
+      path.join(__dirname, 'src'),
+      path.join(__dirname, 'node_modules'),
+    ],
   },
   devServer: {
     port: 3000,
@@ -38,5 +43,6 @@ module.exports = {
       template: path.join(__dirname, 'index.html'),
     }),
     new MiniCssExtractPlugin(),
+    new DotEnv(),
   ],
 }
