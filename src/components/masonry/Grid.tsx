@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import * as api from 'api'
+import React, { useCallback } from 'react'
+import type { Photo as APIPhoto } from 'api'
 import Photo from './Photo'
+import { clamp } from 'utils/math'
+import { useColumnCount, useColumns } from 'hooks/layout'
 
-export default function Grid() {
-  const photos = usePhotos()
-  const columns = useColumns(4, photos)
+const Grid: React.FC<{ photos: APIPhoto[] }> = ({ photos }) => {
+  const numColumns = useCallback(
+    (width: number) => Math.floor(clamp(1, width / 250, Infinity)),
+    []
+  )
+  const clCount = useColumnCount(numColumns)
+  const columns = useColumns(clCount, photos)
 
   return (
     <div className="masonry">
@@ -14,8 +20,9 @@ export default function Grid() {
     </div>
   )
 }
+export default Grid
 
-const Column: React.FC<{ photos: api.Photo[] }> = ({ photos }) => {
+const Column: React.FC<{ photos: APIPhoto[] }> = ({ photos }) => {
   return (
     <div className="masonry__column">
       {photos.map(photo => (
@@ -23,43 +30,4 @@ const Column: React.FC<{ photos: api.Photo[] }> = ({ photos }) => {
       ))}
     </div>
   )
-}
-
-function usePhotos() {
-  const [photos, setPhotos] = useState<api.Photo[]>([])
-
-  useEffect(() => {
-    api.fetchImages().then(setPhotos)
-  }, [])
-
-  return photos
-}
-
-function useColumns(numColumns: number, photos: api.Photo[]) {
-  const [columns, setColumns] = useState<api.Photo[][]>([])
-
-  useEffect(() => {
-    setColumns(columns => {
-      const newColumns = columns.map(col =>
-        col.filter(img => photos.includes(img))
-      )
-
-      while (newColumns.length > numColumns) newColumns.pop()
-      while (newColumns.length < numColumns) newColumns.push([])
-
-      const columnHeights = newColumns.map(col =>
-        col.reduce((a, c) => a + c.height / c.width, 0)
-      )
-
-      for (const photo of photos) {
-        const smallest = columnHeights.indexOf(Math.min(...columnHeights))
-        columnHeights[smallest] += photo.height / photo.width
-        newColumns[smallest].push(photo)
-      }
-
-      return newColumns
-    })
-  }, [numColumns, photos])
-
-  return columns
 }

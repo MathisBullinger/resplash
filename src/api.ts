@@ -1,4 +1,5 @@
-export const fetchImages = (): Promise<Photo[]> => query('photos')
+export const fetchImages = (): Promise<Photo[]> =>
+  query('photos', { per_page: 50 })
 
 async function query(
   path: string,

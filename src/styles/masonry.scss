@@ -1,12 +1,26 @@
 .masonry {
   width: 100%;
   display: flex;
+
+  --gap: 1rem;
 }
 
 .masonry__column {
   flex: 1 1 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.masonry__column:not(:last-of-type) {
+  margin-right: var(--gap);
+}
+
+.masonry__column > * {
+  margin-bottom: var(--gap);
 }
 
 .photo {
   width: 100%;
+  border-radius: 1rem;
+  height: auto;
 }
