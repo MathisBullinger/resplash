@@ -1,12 +1,15 @@
+import React, { useCallback, useState } from 'react'
 import Grid from 'components/masonry/Grid'
 import { usePhotos } from 'hooks/api'
-import React from 'react'
 
 export default function Home() {
-  const photos = usePhotos()
+  const [page, setPage] = useState(0)
+  const photos = usePhotos(page)
+  const loadMore = useCallback(() => setPage(page => page + 1), [])
+
   return (
     <div>
-      <Grid photos={photos} />{' '}
+      <Grid photos={photos} onScrollEnd={loadMore} />
     </div>
   )
 }

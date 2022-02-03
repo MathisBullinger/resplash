@@ -3,6 +3,7 @@
   display: flex;
   --gap: 1rem;
   padding: var(--gap);
+  position: relative;
 }
 
 .masonry__column {
@@ -17,6 +18,15 @@
 
 .masonry__column > * {
   margin-bottom: var(--gap);
+}
+
+.masonry__load {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 100vh;
+  visibility: hidden;
 }
 
 .photo {

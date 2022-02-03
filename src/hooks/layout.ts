@@ -27,11 +27,10 @@ export function useColumns(numColumns: number, photos: Photo[]) {
 
   useEffect(() => {
     setColumns(columns => {
-      const newColumns = columns.map(col =>
-        col.filter(img => photos.includes(img))
-      )
+      const newColumns = columns
+        .slice(0, numColumns)
+        .map(col => col.filter(img => photos.includes(img)))
 
-      while (newColumns.length > numColumns) newColumns.pop()
       while (newColumns.length < numColumns) newColumns.push([])
 
       const columnHeights = newColumns.map(col =>
@@ -54,9 +53,10 @@ export function useColumns(numColumns: number, photos: Photo[]) {
       if (numColumns <= columns.length || !columns.length) return newColumns
 
       // redistribute photos to newly added columns
-      while (largest() < columns.length) {
+      while (true) {
         const from = largest()
         const to = smallest()
+        if (from >= columns.length || to < columns.length) break
         const photo = newColumns[from].pop()
         if (!photo) break
         newColumns[to].push(photo)
