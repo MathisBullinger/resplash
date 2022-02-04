@@ -1,8 +1,10 @@
 @use './app.scss';
 @use './masonry.scss';
+@use './modal.scss';
 
 :root {
-  background-color: #2b2b2b;
+  --cl-back: #2b2b2b;
+  background-color: var(--cl-back);
   font-size: 16px;
   box-sizing: border-box;
 }
@@ -13,6 +15,6 @@
   box-sizing: inherit;
 }
 
-body {
-  margin: 0;
+.noscroll {
+  overflow: hidden;
 }

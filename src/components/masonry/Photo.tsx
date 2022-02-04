@@ -1,15 +1,18 @@
 import React from 'react'
 import type { Photo } from 'api'
+import { Link } from 'react-router-dom'
 
 const MasonPhoto: React.FC<Photo> = ({ id, urls, width, height }) => {
   return (
-    <img
-      className="photo"
-      src={urls.regular}
-      loading="lazy"
-      width={width}
-      height={height}
-    ></img>
+    <Link to={`/photo/${id}`}>
+      <img
+        className="photo"
+        src={urls.regular}
+        loading="lazy"
+        width={width}
+        height={height}
+      ></img>
+    </Link>
   )
 }
 

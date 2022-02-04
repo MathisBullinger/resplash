@@ -34,6 +34,7 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: path.join(__dirname, 'build'),
+    publicPath: '/',
     clean: true,
   },
   resolve: {
@@ -45,7 +46,9 @@ module.exports = {
   },
   devServer: {
     port: 3000,
+    historyApiFallback: true,
   },
+  ...(IS_DEV && { devtool: 'source-map' }),
   module: {
     rules: [
       {
