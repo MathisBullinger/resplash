@@ -1,11 +1,12 @@
 .icon:not(.icon__logo) path {
   stroke: var(--cl-text);
-  stroke-width: 1.5;
   fill: none;
 }
 
 .icon__logo path {
   fill: var(--cl-text);
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .button {
