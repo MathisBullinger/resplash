@@ -33,19 +33,17 @@ const PhotoModal: React.FC<{ photo: Photo }> = ({ photo }) => {
   )
 }
 
-const ModalPhoto: React.FC<{ photo: Photo }> = ({ photo }) => {
-  return (
-    <img
-      className={bem('photo-modal__photo', {
-        vert: 2 * photo.height > 1.56 * photo.width,
-      })}
-      width={photo.width}
-      height={photo.height}
-      src={photo.urls.full}
-      alt={photo.title}
-    ></img>
-  )
-}
+const ModalPhoto: React.FC<{ photo: Photo }> = ({ photo }) => (
+  <img
+    className={bem('photo-modal__photo', {
+      vert: 2 * photo.height > 1.56 * photo.width,
+    })}
+    width={photo.width}
+    height={photo.height}
+    src={photo.urls.full}
+    alt={photo.title}
+  ></img>
+)
 
 const Author: React.FC<{ user: User }> = ({ user }) => {
   return (

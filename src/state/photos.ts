@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 export type Photo = {
   id: string
   title: string
+  date: number
   author: User
   width: number
   height: number

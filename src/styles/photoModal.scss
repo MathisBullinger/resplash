@@ -43,6 +43,11 @@
   font-weight: 700;
   margin: 0;
   margin-bottom: 0.8em;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
 }
 
 .photo-modal__exif {

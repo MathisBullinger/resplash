@@ -29,6 +29,7 @@ const formatImgData =
   (data: any): Photo => {
     const filtered: Photo = {
       id: data.id,
+      date: new Date(data.created_at).getTime(),
       width: data.width,
       height: data.height,
       urls: data.urls,

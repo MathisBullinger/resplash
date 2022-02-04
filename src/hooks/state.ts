@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { add as addPhotos } from 'state/photos'
+import { add as addPhotos, Photo } from 'state/photos'
 import type store from 'state/store'
 import * as redux from 'react-redux'
 import * as api from 'api'
@@ -19,7 +19,9 @@ export const useAppState: redux.TypedUseSelectorHook<
   usePhotos and usePhoto.
 */
 
-export function usePhotos() {
+const sortByDate = (a: Photo, b: Photo) => b.date - a.date
+
+export function usePhotos(sort = sortByDate) {
   const [page, setPage] = useState(0)
   const loading = useRef(false)
   const dispatch = useDispatch()
@@ -35,7 +37,7 @@ export function usePhotos() {
     })
   }, [page, dispatch])
 
-  return [Object.values(photos), fetchMore] as const
+  return [Object.values(photos).sort(sort), fetchMore] as const
 }
 
 export function usePhoto(id: string) {
