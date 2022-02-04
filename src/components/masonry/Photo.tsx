@@ -1,5 +1,5 @@
 import React from 'react'
-import type { Photo } from 'api'
+import type { Photo } from 'state/photos'
 import { Link } from 'react-router-dom'
 
 const MasonPhoto: React.FC<Photo> = ({ id, urls, width, height }) => {

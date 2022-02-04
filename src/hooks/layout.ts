@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import type { Photo } from 'api'
+import type { Photo } from 'state/photos'
 
 export function useColumnCount(
   columns: (width: number) => number,

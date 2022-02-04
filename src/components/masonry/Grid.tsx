@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import type { Photo as APIPhoto } from 'api'
+import type { Photo as APIPhoto } from 'state/photos'
 import Photo from './Photo'
 import Loader from './Loader'
 import { clamp } from 'utils/math'

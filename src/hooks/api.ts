@@ -1,18 +1,15 @@
-import { useState, useEffect } from 'react'
-import * as api from 'api'
+import { useEffect } from 'react'
+import { fetchImages } from 'api'
+import { add } from 'state/photos'
+import { useDispatch } from './state'
 
-export function usePhotos(page = 1) {
-  const [photos, setPhotos] = useState<api.Photo[]>([])
+export function useFetchPhotos(page = 1) {
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (page < 1) return
-    api.fetchImages(page).then(photos => {
-      setPhotos(known => [
-        ...known,
-        ...photos.filter(({ id }) => !known.find(v => v.id === id)),
-      ])
+    fetchImages(page).then(photos => {
+      dispatch(add(photos))
     })
-  }, [page])
-
-  return photos
+  }, [page, dispatch])
 }

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Home from 'screens/Home'
+import PhotoModal from 'screens/PhotoModal'
 import Navigation from 'components/Mainnav'
-import Modal from 'components/atoms/Modal'
 
 const App: React.FC = () => {
   return (
@@ -12,7 +12,7 @@ const App: React.FC = () => {
         <Route path="*" element={<Home />} />
       </Routes>
       <Routes>
-        <Route path="photo/:id" element={<Modal />} />
+        <Route path="photo/:id" element={<PhotoModal />} />
       </Routes>
     </>
   )

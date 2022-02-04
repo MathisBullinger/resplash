@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react'
 
-export default function Modal() {
+const Modal: React.FC = ({ children }) => {
   useBlockScroll()
   return (
     <div className="modal">
-      <aside role="dialog" className="modal__inner"></aside>
+      <aside role="dialog" className="modal__inner">
+        {children}
+      </aside>
     </div>
   )
 }
+
+export default Modal
 
 function useBlockScroll() {
   useEffect(() => {
