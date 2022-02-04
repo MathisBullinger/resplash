@@ -15,13 +15,17 @@
   height: 100%;
   left: 0;
   top: 0;
-  backdrop-filter: blur(2px) saturate(70%) brightness(70%);
+  backdrop-filter: blur(2px) brightness(70%) saturate(60%);
+}
+
+.modal--closable::before {
+  cursor: zoom-out;
 }
 
 @supports not (backdrop-filter: blur(1px)) {
   .modal::before {
     background-color: var(--cl-back);
-    opacity: 0.6;
+    opacity: 0.7;
   }
 }
 
@@ -30,5 +34,6 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background-color: var(--cl-back);
+  border-radius: var(--corner-round);
+  box-shadow: 0px 2px 2px #0006;
 }

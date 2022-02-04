@@ -10,7 +10,7 @@ const Grid: React.FC<{ photos: APIPhoto[]; onScrollEnd: () => void }> = ({
   onScrollEnd,
 }) => {
   const numColumns = useCallback(
-    (width: number) => Math.floor(clamp(1, width / 250, Infinity)),
+    (width: number) => Math.floor(clamp(2, width / 250, Infinity)),
     []
   )
   const clCount = useColumnCount(numColumns)

@@ -31,6 +31,6 @@
 
 .photo {
   width: 100%;
-  border-radius: 1rem;
+  border-radius: var(--corner-round);
   height: auto;
 }

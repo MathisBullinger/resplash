@@ -1,4 +1,153 @@
 .photo-modal {
   width: 40rem;
-  height: 30rem;
+  height: max(60vh, 50rem);
+  max-height: 80vh;
+  max-width: 90vw;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+.photo-modal__txt-sec {
+  flex: 1 1 0px;
+  background-color: var(--cl-back);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+}
+
+.photo-modal__img-sec {
+  flex: 1 1 0px;
+  background-color: #2b2b2bee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.photo-modal__photo {
+  width: 100%;
+  height: auto;
+}
+
+.photo-modal__photo--vert {
+  height: 100%;
+  width: auto;
+}
+
+.photo-modal__title {
+  font-size: 1.13rem;
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 0.8em;
+}
+
+.photo-modal__exif {
+  margin-top: auto;
+  border-top: 1px solid var(--cl-border);
+  padding-top: 0.5rem;
+}
+
+.photo-modal__no-exif {
+  font-size: 0.88rem;
+  color: var(--cl-text-light);
+  margin-top: 0.5em;
+  display: block;
+}
+
+.photo-modal__exif-main {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 0;
+  margin-top: auto;
+}
+
+.photo-modal__exif-datum {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 0.8rem;
+}
+
+.photo-modal__exif-label {
+  font-size: 0.75rem;
+  color: var(--cl-text-label);
+}
+
+.photo-modal__exif-value {
+  font-size: 0.88rem;
+  color: var(--cl-text-medium);
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 1.8;
+}
+
+.user {
+  font-weight: 500;
+  font-style: unset;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+}
+
+.user__name {
+  color: var(--cl-text-light);
+  text-decoration: none;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.user__avatar {
+  border-radius: 50%;
+  width: 1.46rem;
+  height: 1.46rem;
+  margin-right: 0.6rem;
+}
+
+@media (orientation: landscape) {
+  .photo-modal {
+    flex-direction: row;
+    width: unset;
+    max-width: 95vw;
+    height: 70vmin;
+    aspect-ratio: 1.52;
+  }
+
+  .photo-modal__img-sec {
+    flex: 0 1 auto;
+    max-width: 50%;
+  }
+
+  .photo-modal__title {
+    font-size: 2rem;
+  }
+
+  .photo-modal__exif-main {
+    padding-top: 0.8rem;
+  }
+
+  .photo-modal__exif-value {
+    font-size: 1rem;
+  }
+
+  .user {
+    transform-origin: top left;
+    transform: scale(1.25);
+  }
+}
+
+@media (orientation: portrait) {
+  .photo-modal__txt-sec {
+    padding-bottom: 0;
+    padding-top: 1rem;
+  }
+
+  .photo-modal__no-exif {
+    margin-bottom: 1rem;
+  }
 }

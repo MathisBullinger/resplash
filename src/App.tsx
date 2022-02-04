@@ -12,7 +12,7 @@ const App: React.FC = () => {
         <Route path="*" element={<Home />} />
       </Routes>
       <Routes>
-        <Route path="photo/:id" element={<PhotoModal />} />
+        <Route path="photos/:id" element={<PhotoModal />} />
       </Routes>
     </>
   )

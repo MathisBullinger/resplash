@@ -4,9 +4,19 @@
 @use './photoModal.scss';
 
 :root {
+  --corner-round: 1rem;
   --cl-back: #2b2b2b;
-  background-color: var(--cl-back);
+  --cl-text: #fff;
+  --cl-text-medium: #e0e0e0;
+  --cl-text-light: #bdbdbd;
+  --cl-text-label: #828282;
+  --cl-border: #3c3c3c;
+
+  font-family: 'Roboto', sans-serif;
   font-size: 16px;
+  color: var(--cl-text);
+
+  background-color: var(--cl-back);
   box-sizing: border-box;
 }
 
