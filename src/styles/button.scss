@@ -13,6 +13,7 @@
   font-weight: 500;
   color: var(--cl-text);
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .button--accent {
@@ -31,6 +32,11 @@
 .button__icon:not(.icon__close) {
   width: 0.85rem;
   height: 0.85rem;
+  transition: transform 0.1s ease;
+}
+
+.button:active .button__icon:not(.icon__close) {
+  transform: scale(0.9);
 }
 
 .button--text .button__icon {

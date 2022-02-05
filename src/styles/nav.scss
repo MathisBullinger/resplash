@@ -14,13 +14,16 @@
 }
 
 .mainnav__pages {
-  flex-grow: 1;
+  margin: auto;
   display: flex;
   flex-direction: inherit;
   justify-content: center;
   align-items: center;
   padding: 0;
-  gap: 0.5rem;
+  position: relative;
+  --bt-size: 3rem;
+  --gap: 0.5rem;
+  gap: var(--gap);
 }
 
 .mainnav__page {
@@ -28,8 +31,9 @@
 }
 
 .mainnav :is(.mainnav__button, .mainnav__logo) {
-  width: 4.13rem;
-  height: 4.13rem;
+  width: var(--bt-size);
+  height: var(--bt-size);
+  background-color: transparent;
 }
 
 .button.mainnav__button > .button__icon {
@@ -42,12 +46,34 @@
   height: 1.4rem;
 }
 
+.mainnav__pages::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--bt-size);
+  height: var(--bt-size);
+  background-color: var(--cl-text-label);
+  border-radius: var(--corner-round);
+  --pos: calc(var(--current) * (var(--bt-size) + var(--gap)));
+  transform: translateX(var(--pos));
+  transition: transform 0.2s ease;
+}
+
 @media (orientation: landscape) {
   .mainnav {
     width: var(--nav-size);
     height: 100vh;
     flex-direction: column;
     padding: 2rem 0;
+  }
+
+  .mainnav__pages {
+    --bt-size: 4.13rem;
+  }
+
+  .mainnav__pages::before {
+    transform: translateY(var(--pos));
   }
 }
 

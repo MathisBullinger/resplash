@@ -53,6 +53,17 @@ export function useColumns(numColumns: number, photos: Photo[]) {
         newColumns[i].push(photo)
       }
 
+      // no column should be empty while another column has multiple photos
+      while (true) {
+        const empty = columns.findIndex(column => column.length === 0)
+        const multi = columns.findIndex(column => column.length > 1)
+        if (empty < 0 || multi < 0) break
+        const photo = columns[multi].pop()!
+        columns[empty].push(photo)
+        columnHeights[empty] += photo.height / photo.width
+        columnHeights[multi] -= photo.height / photo.width
+      }
+
       if (numColumns <= columns.length || !columns.length) return newColumns
 
       // redistribute photos to newly added columns
