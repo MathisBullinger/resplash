@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import type { Photo as APIPhoto } from 'state/photos'
 import Photo from './Photo'
 import Loader from './Loader'
@@ -31,10 +31,17 @@ const Grid: React.FC<Props> = ({ photos, onScrollEnd, modalPath }) => {
 export default Grid
 
 const Column: React.FC<Omit<Props, 'onScrollEnd'>> = props => {
+  const [eager, setEager] = useState(0)
   return (
     <div className="masonry__column">
-      {props.photos.map(photo => (
-        <Photo key={photo.id} photo={photo} modalPath={props.modalPath} />
+      {props.photos.map((photo, i) => (
+        <Photo
+          key={photo.id}
+          photo={photo}
+          modalPath={props.modalPath}
+          eager={i <= eager}
+          onLoad={() => setEager(n => Math.max(n, i + 1))}
+        />
       ))}
     </div>
   )
