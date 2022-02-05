@@ -28,7 +28,7 @@ const PhotoModal: React.FC<{ photo: Photo }> = ({ photo }) => {
           <ModalPhoto photo={photo} />
         </div>
         <div className="photo-modal__txt-sec">
-          <Actions onClose={close} />
+          <Actions id={photo.id} onClose={close} />
           <header>
             <h1 className="photo-modal__title">{photo.title}</h1>
             <Author user={photo.author} />
@@ -106,10 +106,10 @@ const ExifData: React.FC<{ exif: Partial<Exif> }> = ({ exif }) => (
   </dl>
 )
 
-const Actions: React.FC<{ onClose: () => void }> = props => {
+const Actions: React.FC<{ id: string; onClose: () => void }> = props => {
   return (
     <div className="photo-modal__actions">
-      <LikeButton id="" />
+      <LikeButton id={props.id} />
       <Button icon="close" noText onClick={props.onClose}>
         close
       </Button>

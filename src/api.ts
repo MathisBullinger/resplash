@@ -33,7 +33,11 @@ const formatImgData =
       width: data.width,
       height: data.height,
       urls: data.urls,
-      title: data.description ?? 'Untitled Photo',
+      title:
+        data.description ??
+        data.alt_description ??
+        data.location?.title ??
+        'Untitled Photo',
       author: {
         handle: data.user.username,
         name: data.user.name,

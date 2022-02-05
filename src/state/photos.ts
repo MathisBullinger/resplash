@@ -33,21 +33,27 @@ export type Exif = {
   model: string
 }
 
-type PhotoState = Record<string, Photo>
-const initialState: PhotoState = {}
+type PhotoState = { photos: Record<string, Photo>; favorites: string[] }
+const initialState: PhotoState = { photos: {}, favorites: [] }
 
 export const counterSlice = createSlice({
   name: 'photos',
   initialState,
   reducers: {
-    add: (state, action: PayloadAction<Photo[]>) => {
+    add: ({ photos }, action: PayloadAction<Photo[]>) => {
       for (const photo of action.payload)
-        state[photo.id] = merge(state[photo.id], photo)
+        photos[photo.id] = merge(photos[photo.id], photo)
+    },
+    like: ({ favorites }, { payload: id }: PayloadAction<string>) => {
+      if (!favorites.includes(id)) favorites.push(id)
+    },
+    unlike: (data, action: PayloadAction<string>) => {
+      data.favorites = data.favorites.filter(id => id !== action.payload)
     },
   },
 })
 
-export const { add } = counterSlice.actions
+export const { add, like, unlike } = counterSlice.actions
 export default counterSlice.reducer
 
 // recursively merge b into a

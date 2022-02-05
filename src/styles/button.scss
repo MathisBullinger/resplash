@@ -15,6 +15,10 @@
   cursor: pointer;
 }
 
+.button--accent {
+  background-color: var(--cl-accent);
+}
+
 .button--notext {
   width: 2rem;
   justify-content: space-around;

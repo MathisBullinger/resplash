@@ -5,7 +5,7 @@ import Loader from './Loader'
 import { clamp } from 'utils/math'
 import { useColumnCount, useColumns } from 'hooks/layout'
 
-const Grid: React.FC<{ photos: APIPhoto[]; onScrollEnd: () => void }> = ({
+const Grid: React.FC<{ photos: APIPhoto[]; onScrollEnd?: () => void }> = ({
   photos,
   onScrollEnd,
 }) => {
@@ -18,7 +18,7 @@ const Grid: React.FC<{ photos: APIPhoto[]; onScrollEnd: () => void }> = ({
 
   return (
     <div className="masonry">
-      <Loader count={photos.length} load={onScrollEnd} />
+      {onScrollEnd && <Loader count={photos.length} load={onScrollEnd} />}
       {columns.map((imgs, i) => (
         <Column key={i} photos={imgs} />
       ))}

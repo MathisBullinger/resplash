@@ -16,10 +16,6 @@
   margin-right: var(--gap);
 }
 
-.masonry__column > * {
-  margin-bottom: var(--gap);
-}
-
 .masonry__load {
   position: absolute;
   bottom: 0;
@@ -31,6 +27,29 @@
 
 .photo {
   width: 100%;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.masonry__column > * {
+  margin-bottom: var(--gap);
+}
+
+.photo__img {
+  width: 100%;
   border-radius: var(--corner-round);
   height: auto;
+}
+
+.photo__like {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  opacity: 0;
+}
+
+.photo:hover .photo__like,
+.photo__like[aria-pressed='true'] {
+  opacity: 1;
 }

@@ -40,6 +40,11 @@ export function usePhotos(sort = sortByDate) {
   return [Object.values(photos).sort(sort), fetchMore] as const
 }
 
+export const useFavorites = (sort = sortByDate) =>
+  Object.values(
+    useAppState(state => state.favorites.map(id => state.photos[id]))
+  ).sort(sort)
+
 export function usePhoto(id: string) {
   const photo = useAppState(state => state.photos[id])
   const dispatch = useDispatch()
