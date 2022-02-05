@@ -33,8 +33,12 @@ export type Exif = {
   model: string
 }
 
-type PhotoState = { photos: Record<string, Photo>; favorites: string[] }
-const initialState: PhotoState = { photos: {}, favorites: [] }
+type PhotoState = {
+  photos: Record<string, Photo>
+  favorites: string[]
+  page: number
+}
+const initialState: PhotoState = { photos: {}, favorites: [], page: 0 }
 
 export const counterSlice = createSlice({
   name: 'photos',
@@ -56,10 +60,13 @@ export const counterSlice = createSlice({
         state.photos[photo.id] = merge(state.photos[photo.id], photo)
       state.favorites.push(...ids.filter(id => !state.favorites.includes(id)))
     },
+    nextPage(state) {
+      state.page++
+    },
   },
 })
 
-export const { add, like, unlike } = counterSlice.actions
+export const { add, like, unlike, nextPage } = counterSlice.actions
 export default counterSlice.reducer
 
 // recursively merge b into a

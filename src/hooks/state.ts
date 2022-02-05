@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { add as addPhotos, Photo } from 'state/photos'
+import { useCallback, useEffect, useRef } from 'react'
+import { add as addPhotos, nextPage, Photo } from 'state/photos'
 import type store from 'state/store'
 import * as redux from 'react-redux'
 import * as api from 'api'
@@ -22,13 +22,20 @@ export const useAppState: redux.TypedUseSelectorHook<
 const sortByDate = (a: Photo, b: Photo) => b.date - a.date
 
 export function usePhotos(sort = sortByDate) {
-  const [page, setPage] = useState(0)
+  const page = useAppState(state => state.page)
   const loading = useRef(false)
   const dispatch = useDispatch()
-  const fetchMore = useCallback(() => setPage(page => page + 1), [])
   const photos = useAppState(state => state.photos)
+  const initialized = useRef(false)
+  const fetchMore = useCallback(() => {
+    if (initialized.current) dispatch(nextPage())
+  }, [dispatch])
 
   useEffect(() => {
+    if (!initialized.current) {
+      initialized.current = true
+      return
+    }
     if (page < 1 || loading.current) return
     loading.current = true
     api.fetchPhotos(page).then(photos => {
