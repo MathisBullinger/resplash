@@ -1,11 +1,10 @@
+import { usePageIndex } from 'hooks/navigation'
 import React, { CSSProperties } from 'react'
-import { useLocation } from 'react-router-dom'
 import Button from './atoms/Button'
 import type { Icon } from './atoms/Icon'
 
 export default function Mainnav() {
-  const location = useLocation()
-  const isHome = !/\/favorites(\/|$)/.test(location.pathname)
+  const page = usePageIndex()
 
   return (
     <nav className="mainnav">
@@ -14,10 +13,10 @@ export default function Mainnav() {
       </Button>
       <ul
         className="mainnav__pages"
-        style={{ '--current': isHome ? 0 : 1 } as CSSProperties}
+        style={{ '--current': page } as CSSProperties}
       >
-        <Page path="/" icon="img" label="home" active={isHome} />
-        <Page path="/favorites" icon="heart" active={!isHome} />
+        <Page path="/" icon="img" label="home" active={page === 0} />
+        <Page path="/favorites" icon="heart" active={page === 1} />
       </ul>
     </nav>
   )

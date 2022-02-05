@@ -1,12 +1,52 @@
 .app {
   --nav-size: 5rem;
-  padding-bottom: var(--nav-size);
+  --page-transition: 0.2s ease;
+  height: 100%;
 }
 
 @media (orientation: landscape) {
   .app {
     --nav-size: 5.63rem;
-    padding-bottom: unset;
     padding-left: var(--nav-size);
   }
+}
+
+.page-container {
+  width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+  height: 100%;
+  --pages: 2;
+}
+
+.page-container__inner {
+  height: 100%;
+  width: calc(var(--pages) * 100%);
+  display: flex;
+  transform: translateX(calc(-100% / var(--pages) * var(--page)));
+  transition: transform var(--page-transition);
+}
+
+.page-container__slot {
+  width: calc(100% / var(--pages));
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+}
+
+@media (orientation: portrait) {
+  .page-container__slot {
+    padding-bottom: var(--nav-size);
+  }
+}
+
+.no-favorites {
+  font-size: 1.5rem;
+  max-width: 80vw;
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

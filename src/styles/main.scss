@@ -23,14 +23,20 @@
 
   background-color: var(--cl-back);
   box-sizing: border-box;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+}
+
+.noscroll {
+  overflow: hidden;
 }
 
 *,
 *:before,
 *:after {
   box-sizing: inherit;
-}
-
-.noscroll {
-  overflow: hidden;
 }

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import Home from 'screens/Home'
-import Favorites from 'screens/Favorites'
+import PageContainer from 'screens/PageContainer'
 import PhotoModal from 'screens/PhotoModal'
 import Navigation from 'components/Mainnav'
 
@@ -10,8 +9,11 @@ const App: React.FC = () => {
     <>
       <Navigation />
       <Switch>
-        <Route exact path="(/|/photos/:id)" component={Home} />
-        <Route exact path="/favorites/:id?" component={Favorites} />
+        <Route
+          exact
+          path={['/', '/favorites/:id?', '/photos/:id']}
+          component={PageContainer}
+        />
         <Redirect to="/" />
       </Switch>
       <Route path="(/photos|/favorites)/:id" component={PhotoModal} />

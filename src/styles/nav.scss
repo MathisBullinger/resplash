@@ -57,7 +57,7 @@
   border-radius: var(--corner-round);
   --pos: calc(var(--current) * (var(--bt-size) + var(--gap)));
   transform: translateX(var(--pos));
-  transition: transform 0.2s ease;
+  transition: transform var(--page-transition);
 }
 
 @media (orientation: landscape) {
