@@ -36,17 +36,30 @@ export type Exif = {
 type PhotoState = {
   photos: Record<string, Photo>
   favorites: string[]
+  // photo ids in the order in that they appear in the editorial feed
+  gallery: string[]
   page: number
 }
-const initialState: PhotoState = { photos: {}, favorites: [], page: 0 }
+const initialState: PhotoState = {
+  photos: {},
+  favorites: [],
+  gallery: [],
+  page: 0,
+}
 
 export const counterSlice = createSlice({
   name: 'photos',
   initialState,
   reducers: {
-    add: ({ photos }, action: PayloadAction<Photo[]>) => {
+    add: (state, action: PayloadAction<Photo[]>) => {
       for (const photo of action.payload)
-        photos[photo.id] = merge(photos[photo.id], photo)
+        state.photos[photo.id] = merge(state.photos[photo.id], photo)
+
+      state.gallery.push(
+        ...action.payload
+          .map(({ id }) => id)
+          .filter(id => !state.gallery.includes(id))
+      )
     },
     like: ({ favorites }, { payload: id }: PayloadAction<string>) => {
       if (!favorites.includes(id)) favorites.push(id)
