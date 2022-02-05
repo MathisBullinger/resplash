@@ -4,7 +4,7 @@
   width: 100vw;
   bottom: 0;
   left: 0;
-  background-color: #3c3c3c;
+  background-color: var(--cl-surface);
   z-index: 100;
   display: flex;
   flex-direction: row;
@@ -20,11 +20,26 @@
   justify-content: center;
   align-items: center;
   padding: 0;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .mainnav__page {
   list-style: none;
+}
+
+.mainnav :is(.mainnav__button, .mainnav__logo) {
+  width: 4.13rem;
+  height: 4.13rem;
+}
+
+.button.mainnav__button > .button__icon {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.button.mainnav__logo > .button__icon {
+  width: 1.4rem;
+  height: 1.4rem;
 }
 
 @media (orientation: landscape) {

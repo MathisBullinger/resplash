@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import bem from 'utils/bem'
 import SVG, { Icon } from './Icon'
 
 type BtProps = {
@@ -11,13 +12,13 @@ type BtProps = {
 }
 
 const Button: React.FC<BtProps> = props => {
-  const classes = ['button']
+  const classes = [bem('button', { notext: props.noText, text: !props.noText })]
   if (props.className) classes.push(props.className)
   const className = classes.join(' ')
 
   const inner = (
     <>
-      {props.icon && <SVG icon={props.icon} />}
+      {props.icon && <SVG icon={props.icon} className="button__icon" />}
       {props.noText ? (
         <div className="button__label">{props.children}</div>
       ) : (

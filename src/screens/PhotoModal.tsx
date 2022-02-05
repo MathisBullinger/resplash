@@ -1,9 +1,11 @@
 import React from 'react'
 import Modal from 'components/atoms/Modal'
-import { useParams, useLocation } from 'react-router-dom'
+import { useParams, useLocation, useNavigate } from 'react-router-dom'
 import { usePhoto } from 'hooks/state'
-import type { Photo, User } from 'state/photos'
+import type { Exif, Photo, User } from 'state/photos'
 import bem from 'utils/bem'
+import Button from 'components/atoms/Button'
+import LikeButton from 'components/LikeButton'
 
 export default function ModalRoute() {
   const { id } = useParams<{ id: string }>()
@@ -13,15 +15,20 @@ export default function ModalRoute() {
 }
 
 const PhotoModal: React.FC<{ photo: Photo }> = ({ photo }) => {
-  const baseUrl = useLocation().pathname.replace(/(photos\/?)[^/]+\/?$/, '')
+  const closeUrl = useLocation().pathname.replace(/(photos\/?)[^/]+\/?$/, '')
+  const navigate = useNavigate()
+  const close = () => {
+    if (closeUrl) navigate(closeUrl)
+  }
 
   return (
-    <Modal closeUrl={baseUrl}>
+    <Modal onClose={close}>
       <article className="photo-modal">
         <div className="photo-modal__img-sec">
           <ModalPhoto photo={photo} />
         </div>
         <div className="photo-modal__txt-sec">
+          <Actions onClose={close} />
           <header>
             <h1 className="photo-modal__title">{photo.title}</h1>
             <Author user={photo.author} />
@@ -66,22 +73,46 @@ const Author: React.FC<{ user: User }> = ({ user }) => {
   )
 }
 
+const exifOrder = new Map([
+  ['make', 'Camera make'],
+  ['model', 'Camera model'],
+  ['focal', 'Focal length'],
+  ['aperture', 'Aperture'],
+  ['exposure', 'Shutter speed'],
+  ['iso', 'ISO'],
+])
+
 const PhotoExif: React.FC<{ photo: Photo }> = ({ photo }) => {
   if (!photo.exif && photo.source === 'batch') return null
   return (
-    <div className="photo-modal__exif">
+    <div className="exif">
       {!photo.exif ? (
         <span className="photo-modal__no-exif">No Exif data available.</span>
       ) : (
-        <dl className="photo-modal__exif-main">
-          {Object.entries(photo.exif).map(([k, v]) => (
-            <div key={k} className="photo-modal__exif-datum">
-              <dt className="photo-modal__exif-label">{k}</dt>
-              <dd className="photo-modal__exif-value">{v}</dd>
-            </div>
-          ))}
-        </dl>
+        <ExifData exif={photo.exif} />
       )}
+    </div>
+  )
+}
+
+const ExifData: React.FC<{ exif: Partial<Exif> }> = ({ exif }) => (
+  <dl className="exif__main">
+    {Object.entries(exif).map(([k, v]) => (
+      <div key={k} className={['exif__datum', `exif__${k}`].join(' ')}>
+        <dt className="exif__label">{exifOrder.get(k)}</dt>
+        <dd className="exif__value">{v}</dd>
+      </div>
+    ))}
+  </dl>
+)
+
+const Actions: React.FC<{ onClose: () => void }> = props => {
+  return (
+    <div className="photo-modal__actions">
+      <LikeButton id="" />
+      <Button icon="close" noText onClick={props.onClose}>
+        close
+      </Button>
     </div>
   )
 }

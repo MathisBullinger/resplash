@@ -1,0 +1,9 @@
+.icon path {
+  stroke: var(--cl-text);
+  fill: none;
+}
+
+:is(.icon__logo, .icon__close) path {
+  stroke: unset;
+  fill: var(--cl-text);
+}

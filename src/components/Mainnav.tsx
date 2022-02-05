@@ -25,7 +25,7 @@ type PageProps = {
 
 const Page: React.FC<PageProps> = ({ icon, path, label }) => (
   <li className="mainnav__page">
-    <Button linkTo={path} icon={icon} noText>
+    <Button linkTo={path} icon={icon} noText className="mainnav__button">
       {label ?? path.replace(/^\//, '')}
     </Button>
   </li>

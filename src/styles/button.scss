@@ -1,0 +1,44 @@
+.button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  height: 2rem;
+  border: none;
+  border-radius: var(--corner-round);
+  background-color: var(--cl-surface);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--cl-text);
+  cursor: pointer;
+}
+
+.button--notext {
+  width: 2rem;
+  justify-content: space-around;
+}
+
+.button--text {
+  padding: 0 0.5rem;
+}
+
+.button__icon:not(.icon__close) {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.button--text .button__icon {
+  margin-right: 0.5rem;
+}
+
+// visually hide button text in icon button,
+// but keep it accessible to assistive tech
+.button__label {
+  position: absolute;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+}

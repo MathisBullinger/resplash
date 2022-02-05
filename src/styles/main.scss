@@ -1,18 +1,20 @@
 @use './app.scss';
 @use './nav.scss';
+@use './exif.scss';
+@use './icon.scss';
 @use './modal.scss';
-@use './atoms.scss';
+@use './button.scss';
 @use './masonry.scss';
 @use './photoModal.scss';
 
 :root {
-  --corner-round: 1rem;
+  --corner-round: 10px;
   --cl-back: #2b2b2b;
   --cl-text: #fff;
   --cl-text-medium: #e0e0e0;
   --cl-text-light: #bdbdbd;
   --cl-text-label: #828282;
-  --cl-border: #3c3c3c;
+  --cl-surface: #3c3c3c;
 
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
