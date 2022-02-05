@@ -1,6 +1,6 @@
 import React from 'react'
 import Modal from 'components/atoms/Modal'
-import { useParams, useLocation, useNavigate } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { usePhoto } from 'hooks/state'
 import type { Exif, Photo, User } from 'state/photos'
 import bem from 'utils/bem'
@@ -15,10 +15,10 @@ export default function ModalRoute() {
 }
 
 const PhotoModal: React.FC<{ photo: Photo }> = ({ photo }) => {
-  const closeUrl = useLocation().pathname.replace(/(photos\/?)[^/]+\/?$/, '')
-  const navigate = useNavigate()
+  const history = useHistory()
+  const closeUrl = history.location.pathname.replace(/(photos\/)?[^/]+\/?$/, '')
   const close = () => {
-    if (closeUrl) navigate(closeUrl)
+    if (closeUrl) history.push(closeUrl)
   }
 
   return (

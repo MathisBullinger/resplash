@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import Home from 'screens/Home'
 import Favorites from 'screens/Favorites'
 import PhotoModal from 'screens/PhotoModal'
@@ -9,13 +9,12 @@ const App: React.FC = () => {
   return (
     <>
       <Navigation />
-      <Routes>
-        <Route path="/favorites" element={<Favorites />} />
-        <Route path="*" element={<Home />} />
-      </Routes>
-      <Routes>
-        <Route path="photos/:id" element={<PhotoModal />} />
-      </Routes>
+      <Switch>
+        <Route exact path="(/|/photos/:id)" component={Home} />
+        <Route exact path="/favorites/:id?" component={Favorites} />
+        <Redirect to="/" />
+      </Switch>
+      <Route path="(/photos|/favorites)/:id" component={PhotoModal} />
     </>
   )
 }

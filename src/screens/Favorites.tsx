@@ -4,7 +4,7 @@ import { useFavorites } from 'hooks/state'
 
 const Favorites = () => (
   <div>
-    <Grid photos={useFavorites()} />
+    <Grid photos={useFavorites()} modalPath="/favorites" />
   </div>
 )
 

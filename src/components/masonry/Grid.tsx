@@ -5,10 +5,13 @@ import Loader from './Loader'
 import { clamp } from 'utils/math'
 import { useColumnCount, useColumns } from 'hooks/layout'
 
-const Grid: React.FC<{ photos: APIPhoto[]; onScrollEnd?: () => void }> = ({
-  photos,
-  onScrollEnd,
-}) => {
+type Props = {
+  photos: APIPhoto[]
+  onScrollEnd?: () => void
+  modalPath?: string
+}
+
+const Grid: React.FC<Props> = ({ photos, onScrollEnd, modalPath }) => {
   const numColumns = useCallback(
     (width: number) => Math.floor(clamp(2, width / 250, Infinity)),
     []
@@ -20,18 +23,18 @@ const Grid: React.FC<{ photos: APIPhoto[]; onScrollEnd?: () => void }> = ({
     <div className="masonry">
       {onScrollEnd && <Loader count={photos.length} load={onScrollEnd} />}
       {columns.map((imgs, i) => (
-        <Column key={i} photos={imgs} />
+        <Column key={i} photos={imgs} modalPath={modalPath} />
       ))}
     </div>
   )
 }
 export default Grid
 
-const Column: React.FC<{ photos: APIPhoto[] }> = ({ photos }) => {
+const Column: React.FC<Omit<Props, 'onScrollEnd'>> = props => {
   return (
     <div className="masonry__column">
-      {photos.map(photo => (
-        <Photo key={photo.id} {...photo} />
+      {props.photos.map(photo => (
+        <Photo key={photo.id} photo={photo} modalPath={props.modalPath} />
       ))}
     </div>
   )
