@@ -15,6 +15,7 @@ export type Photo = {
     small: string
     thumb: string
   }
+  color: string
   source: 'batch' | 'detailed'
 }
 

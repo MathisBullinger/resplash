@@ -33,6 +33,7 @@ const formatImgData =
       width: data.width,
       height: data.height,
       urls: data.urls,
+      color: data.color,
       title:
         data.description ??
         data.alt_description ??

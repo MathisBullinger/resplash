@@ -20,12 +20,13 @@ const PhotoModal: React.FC<{ photo: Photo }> = ({ photo }) => {
   const close = () => {
     if (closeUrl) history.push(closeUrl)
   }
+  const anchorVert = 2 * photo.height > 1.56 * photo.width
 
   return (
     <Modal onClose={close}>
       <article className="photo-modal">
-        <div className="photo-modal__img-sec">
-          <ModalPhoto photo={photo} />
+        <div className={bem('photo-modal__img-sec', { hor: !anchorVert })}>
+          <ModalPhoto photo={photo} anchorVert={anchorVert} />
         </div>
         <div className="photo-modal__txt-sec">
           <Actions id={photo.id} onClose={close} />
@@ -40,17 +41,22 @@ const PhotoModal: React.FC<{ photo: Photo }> = ({ photo }) => {
   )
 }
 
-const ModalPhoto: React.FC<{ photo: Photo }> = ({ photo }) => (
-  <img
-    className={bem('photo-modal__photo', {
-      vert: 2 * photo.height > 1.56 * photo.width,
-    })}
-    width={photo.width}
-    height={photo.height}
-    src={photo.urls.full}
-    alt={photo.title}
-  ></img>
-)
+const ModalPhoto: React.FC<{ photo: Photo; anchorVert: boolean }> = ({
+  photo,
+  anchorVert,
+}) => {
+  return (
+    <img
+      className={bem('photo-modal__photo', {
+        vert: anchorVert,
+      })}
+      width={photo.width}
+      height={photo.height}
+      src={photo.urls.full}
+      alt={photo.title}
+    ></img>
+  )
+}
 
 const Author: React.FC<{ user: User }> = ({ user }) => {
   return (

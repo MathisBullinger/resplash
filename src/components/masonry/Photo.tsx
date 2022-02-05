@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 import type { Photo } from 'state/photos'
 import { Link } from 'react-router-dom'
 import LikeButton from 'components/LikeButton'
@@ -9,7 +9,7 @@ type Props = {
 }
 
 const MasonPhoto: React.FC<Props> = ({ photo, modalPath = `/photos` }) => (
-  <figure className="photo">
+  <figure className="photo" style={{ '--color': photo.color } as CSSProperties}>
     <Link to={`${modalPath}/${photo.id}`}>
       <img
         className="photo__img"
