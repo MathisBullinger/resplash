@@ -50,6 +50,12 @@ export const counterSlice = createSlice({
     unlike: (data, action: PayloadAction<string>) => {
       data.favorites = data.favorites.filter(id => id !== action.payload)
     },
+    hydrateFavorites(state, action: PayloadAction<Photo[]>) {
+      const ids = action.payload.map(({ id }) => id)
+      for (const photo of action.payload)
+        state.photos[photo.id] = merge(state.photos[photo.id], photo)
+      state.favorites.push(...ids.filter(id => !state.favorites.includes(id)))
+    },
   },
 })
 
