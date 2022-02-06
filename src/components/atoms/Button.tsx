@@ -16,11 +16,7 @@ type BtProps = {
 
 const Button: React.FC<BtProps> = props => {
   const classes = [
-    bem('button', {
-      notext: props.noText,
-      text: !props.noText,
-      accent: props.accent,
-    }),
+    bem('button', props.noText ? 'notext' : 'text', { accent: props.accent }),
   ]
   if (props.className) classes.push(props.className)
   const className = classes.join(' ')

@@ -48,9 +48,7 @@ const ModalPhoto: React.FC<{ photo: Photo; anchorVert: boolean }> = ({
 }) => {
   return (
     <img
-      className={bem('photo-modal__photo', {
-        vert: anchorVert,
-      })}
+      className={bem('photo-modal__photo', { vert: anchorVert })}
       width={photo.width}
       height={photo.height}
       src={photo.urls.full}

@@ -13,10 +13,10 @@ const Grid: Layout = ({ photos, columns }) => {
       {list.map(photo => (
         <li
           key={photo.id}
-          className={bem('fixgrid__img', {
-            portrait: photo.width < photo.height,
-            landscape: photo.width >= photo.height,
-          })}
+          className={bem(
+            'fixgrid__img',
+            photo.width < photo.height ? 'portrait' : 'landscape'
+          )}
         >
           <Photo photo={photo} cover />
         </li>

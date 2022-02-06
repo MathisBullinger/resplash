@@ -9,7 +9,7 @@ type State = {
 }
 const initialState: State = {
   layout: (localStorage.getItem('layout') as Layout) ?? 'mason',
-  theme: (localStorage.getItem('theme') as Theme) ?? 'dark',
+  theme: document.documentElement.dataset.theme as 'dark' | 'light',
 }
 
 const { reducer, actions } = createSlice({
@@ -18,12 +18,9 @@ const { reducer, actions } = createSlice({
   reducers: {
     setLayout(state, action: PayloadAction<Layout>) {
       state.layout = action.payload
-      localStorage.setItem('layout', action.payload)
     },
     setTheme(state, action: PayloadAction<Theme>) {
       state.theme = action.payload
-      localStorage.setItem('theme', action.payload)
-      document.documentElement.dataset.theme = action.payload
     },
   },
 })
