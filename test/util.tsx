@@ -2,6 +2,8 @@ import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
 import { cleanup, render as rtlRender } from '@testing-library/react'
 
+export * from '@testing-library/react'
+
 const Providers: React.FC = ({ children }) => (
   <MemoryRouter>{children}</MemoryRouter>
 )
