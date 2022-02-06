@@ -16,8 +16,8 @@ function updateFavorites({ photos }: State) {
 }
 
 const initialState = store.getState()
-export let theme = initialState.preferences.theme
-export let layout = initialState.preferences.layout
+let theme = initialState.preferences.theme
+let layout = initialState.preferences.layout
 
 function updatePreferences(state: State) {
   if (state.preferences.theme !== theme) {

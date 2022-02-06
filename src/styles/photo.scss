@@ -21,9 +21,11 @@
   opacity: 0;
 }
 
-.photo:hover .photo__like,
-.photo__like[aria-pressed='true'] {
-  opacity: 1;
+@media (hover: hover) {
+  .photo:hover .photo__like,
+  .photo__like[aria-pressed='true'] {
+    opacity: 1;
+  }
 }
 
 .photo--cover {

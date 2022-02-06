@@ -45,47 +45,41 @@ const PhotoModal: React.FC<{ photo: Photo }> = ({ photo }) => {
 const ModalPhoto: React.FC<{ photo: Photo; anchorVert: boolean }> = ({
   photo,
   anchorVert,
-}) => {
-  return (
+}) => (
+  <img
+    className={bem('photo-modal__photo', { vert: anchorVert })}
+    width={photo.width}
+    height={photo.height}
+    src={photo.urls.full}
+    alt={photo.title}
+    style={{ '--color': photo.color } as CSSProperties}
+  ></img>
+)
+
+const Author: React.FC<{ user: User }> = ({ user }) => (
+  <address className="user">
     <img
-      className={bem('photo-modal__photo', { vert: anchorVert })}
-      width={photo.width}
-      height={photo.height}
-      src={photo.urls.full}
-      alt={photo.title}
-      style={{ '--color': photo.color } as CSSProperties}
-    ></img>
-  )
-}
+      className="user__avatar"
+      src={user.image}
+      width={1}
+      height={1}
+      alt=""
+    />
+    <a
+      className="user__name"
+      rel="author"
+      href={`https://unsplash.com/@${user.handle}`}
+    >
+      {user.name}
+    </a>
+  </address>
+)
 
-const Author: React.FC<{ user: User }> = ({ user }) => {
-  return (
-    <address className="user">
-      <img
-        className="user__avatar"
-        src={user.image}
-        width={1}
-        height={1}
-        alt=""
-      />
-      <a
-        className="user__name"
-        rel="author"
-        href={`https://unsplash.com/@${user.handle}`}
-      >
-        {user.name}
-      </a>
-    </address>
-  )
-}
-
-const Actions: React.FC<{ id: string; onClose: () => void }> = props => {
-  return (
-    <div className="photo-modal__actions">
-      <LikeButton id={props.id} />
-      <Button icon="close" noText onClick={props.onClose}>
-        close
-      </Button>
-    </div>
-  )
-}
+const Actions: React.FC<{ id: string; onClose: () => void }> = props => (
+  <div className="photo-modal__actions">
+    <LikeButton id={props.id} />
+    <Button icon="close" noText onClick={props.onClose}>
+      close
+    </Button>
+  </div>
+)
