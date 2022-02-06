@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0 1.5rem;
+  padding: 0 2rem;
   box-shadow: 0px 0px 2px #0006;
 }
 
@@ -74,11 +74,5 @@
 
   .mainnav__pages::before {
     transform: translateY(var(--pos));
-  }
-}
-
-@media (orientation: portrait) {
-  .mainnav > .mainnav__logo {
-    position: absolute;
   }
 }

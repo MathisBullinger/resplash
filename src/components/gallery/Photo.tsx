@@ -2,12 +2,14 @@ import React, { CSSProperties } from 'react'
 import type { Photo } from 'state/photos'
 import { Link } from 'react-router-dom'
 import LikeButton from 'components/LikeButton'
+import bem from 'utils/bem'
 
 type Props = {
   photo: Photo
   modalPath?: string
   eager?: boolean
   onLoad?: () => void
+  cover?: boolean
 }
 
 const MasonPhoto: React.FC<Props> = ({
@@ -15,11 +17,15 @@ const MasonPhoto: React.FC<Props> = ({
   modalPath = `/photos`,
   eager = false,
   onLoad,
+  cover,
 }) => (
-  <figure className="photo" style={{ '--color': photo.color } as CSSProperties}>
+  <figure
+    className={bem('photo', { cover })}
+    style={{ '--color': photo.color } as CSSProperties}
+  >
     <Link to={`${modalPath}/${photo.id}`}>
       <img
-        className="photo__img"
+        className={bem('photo__img', { cover })}
         src={photo.urls.regular}
         loading={eager ? 'eager' : 'lazy'}
         width={photo.width}

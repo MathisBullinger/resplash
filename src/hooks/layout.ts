@@ -1,11 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useLayoutEffect } from 'react'
 import type { Photo } from 'state/photos'
+import { clamp } from 'utils/math'
+
+const defaultColumns = (width: number) =>
+  Math.floor(clamp(2, width / 250, Infinity))
 
 export function useColumnCount(
-  columns: (width: number) => number,
-  container = document.body
+  container: HTMLElement | null,
+  columns = defaultColumns
 ) {
-  const [columnCount, setClCount] = useState(columns(container.offsetWidth))
+  const [columnCount, setClCount] = useState(
+    container ? columns(container.offsetWidth) : null
+  )
 
   const [observer] = useState(
     new ResizeObserver(([{ contentRect }]) => {
@@ -13,7 +19,8 @@ export function useColumnCount(
     })
   )
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    if (!container) return
     const el = container
     observer.observe(el)
     return () => observer.unobserve(el)

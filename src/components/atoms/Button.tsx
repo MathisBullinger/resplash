@@ -11,6 +11,7 @@ type BtProps = {
   icon?: Icon
   noText?: boolean
   accent?: boolean
+  title?: string
 }
 
 const Button: React.FC<BtProps> = props => {

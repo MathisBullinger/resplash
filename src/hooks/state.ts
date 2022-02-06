@@ -20,10 +20,12 @@ export const useAppState: redux.TypedUseSelectorHook<
 */
 
 export function usePhotos() {
-  const page = useAppState(state => state.page)
+  const page = useAppState(state => state.photos.page)
   const loading = useRef(false)
   const dispatch = useDispatch()
-  const photos = useAppState(state => state.gallery.map(id => state.photos[id]))
+  const photos = useAppState(({ photos }) =>
+    photos.gallery.map(id => photos.byId[id])
+  )
   const initialized = useRef(false)
   const fetchMore = useCallback(() => {
     if (initialized.current) dispatch(nextPage())
@@ -47,11 +49,11 @@ export function usePhotos() {
 
 export const useFavorites = () =>
   Object.values(
-    useAppState(state => state.favorites.map(id => state.photos[id]))
+    useAppState(({ photos }) => photos.favorites.map(id => photos.byId[id]))
   )
 
 export function usePhoto(id: string) {
-  const photo = useAppState(state => state.photos[id])
+  const photo = useAppState(state => state.photos.byId[id])
   const dispatch = useDispatch()
   const fetched = useRef(false)
 

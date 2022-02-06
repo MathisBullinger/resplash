@@ -20,7 +20,7 @@ const Loader: React.FC<{ count: number; load: () => void }> = ({
 }) => {
   const ref = useRef(null)
   useLoad(ref, count, load)
-  return <div className="masonry__load" ref={ref} />
+  return <div className="gallery__load-area" ref={ref} />
 }
 export default Loader
 

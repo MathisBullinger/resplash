@@ -35,26 +35,26 @@ export type Exif = {
 }
 
 type PhotoState = {
-  photos: Record<string, Photo>
+  byId: Record<string, Photo>
   favorites: string[]
   // photo ids in the order in that they appear in the editorial feed
   gallery: string[]
   page: number
 }
 const initialState: PhotoState = {
-  photos: {},
+  byId: {},
   favorites: [],
   gallery: [],
   page: 0,
 }
 
-export const counterSlice = createSlice({
+const { reducer, actions } = createSlice({
   name: 'photos',
   initialState,
   reducers: {
-    add: (state, action: PayloadAction<Photo[]>) => {
+    add(state, action: PayloadAction<Photo[]>) {
       for (const photo of action.payload)
-        state.photos[photo.id] = merge(state.photos[photo.id], photo)
+        state.byId[photo.id] = merge(state.byId[photo.id], photo)
 
       state.gallery.push(
         ...action.payload
@@ -62,16 +62,16 @@ export const counterSlice = createSlice({
           .filter(id => !state.gallery.includes(id))
       )
     },
-    like: ({ favorites }, { payload: id }: PayloadAction<string>) => {
+    like({ favorites }, { payload: id }: PayloadAction<string>) {
       if (!favorites.includes(id)) favorites.push(id)
     },
-    unlike: (data, action: PayloadAction<string>) => {
+    unlike(data, action: PayloadAction<string>) {
       data.favorites = data.favorites.filter(id => id !== action.payload)
     },
     hydrateFavorites(state, action: PayloadAction<Photo[]>) {
       const ids = action.payload.map(({ id }) => id)
       for (const photo of action.payload)
-        state.photos[photo.id] = merge(state.photos[photo.id], photo)
+        state.byId[photo.id] = merge(state.byId[photo.id], photo)
       state.favorites.push(...ids.filter(id => !state.favorites.includes(id)))
     },
     nextPage(state) {
@@ -80,8 +80,8 @@ export const counterSlice = createSlice({
   },
 })
 
-export const { add, like, unlike, nextPage } = counterSlice.actions
-export default counterSlice.reducer
+export const { add, like, unlike, nextPage } = actions
+export default reducer
 
 // recursively merge b into a
 const merge = <T>(a: T | undefined, b: T): T => {

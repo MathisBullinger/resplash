@@ -4,14 +4,14 @@ import state from './store'
 let knownLikes: string[] = []
 
 state.subscribe(() => {
-  const { favorites: likes, photos } = state.getState()
-  if (likes.length === knownLikes.length) return
+  const photos = state.getState().photos
+  if (photos.favorites.length === knownLikes.length) return
 
-  const added = likes.filter(id => !knownLikes.includes(id))
-  const removed = knownLikes.filter(id => !likes.includes(id))
-  knownLikes = [...likes]
+  const added = photos.favorites.filter(id => !knownLikes.includes(id))
+  const removed = knownLikes.filter(id => !photos.favorites.includes(id))
+  knownLikes = [...photos.favorites]
 
-  idb.writeFavorites(...added.map(id => photos[id]))
+  idb.writeFavorites(...added.map(id => photos.byId[id]))
   idb.removeFavorites(...removed)
 })
 

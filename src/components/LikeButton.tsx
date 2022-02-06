@@ -10,7 +10,7 @@ type Props = {
 }
 
 const LikeButton: React.FC<Props> = ({ id, compact, ...props }) => {
-  const liked = useAppState(state => state.favorites.includes(id))
+  const liked = useAppState(state => state.photos.favorites.includes(id))
   const dispatch = useDispatch()
   const toggleLike = () => dispatch(liked ? unlike(id) : like(id))
 

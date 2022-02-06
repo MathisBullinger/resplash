@@ -1,0 +1,12 @@
+.gallery {
+  position: relative;
+}
+
+.gallery__load-area {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 200vh;
+  visibility: hidden;
+}

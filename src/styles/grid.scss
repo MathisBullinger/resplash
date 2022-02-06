@@ -1,0 +1,23 @@
+.fixgrid {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  gap: var(--grid-gap);
+  padding: var(--grid-gap);
+  width: 100%;
+  list-style: none;
+  margin: 0;
+}
+
+.fixgrid__img {
+  width: 100%;
+  overflow: hidden;
+}
+
+.fixgrid__img--landscape {
+  aspect-ratio: 1.67;
+}
+
+.fixgrid__img--portrait {
+  aspect-ratio: 0.83;
+  grid-row: span 2;
+}
