@@ -61,7 +61,12 @@
 }
 
 .button.mainnav__theme {
-  transform: translateY(-2.2rem) scale(1.1);
+  transform: scale(1.1);
+}
+
+.mainnav__prefs {
+  display: flex;
+  flex-direction: inherit;
 }
 
 @media (orientation: landscape) {
@@ -79,10 +84,21 @@
   .mainnav__pages::before {
     transform: translateY(var(--pos));
   }
+
+  .mainnav__prefs {
+    height: 5rem;
+    justify-content: flex-end;
+    padding-bottom: 0.5rem;
+    gap: 2rem;
+  }
 }
 
 @media (orientation: portrait) {
-  .button.mainnav__theme {
+  .mainnav__prefs {
+    padding: 0 1px;
+  }
+
+  .mainnav__button + .button.mainnav__theme {
     display: none;
   }
 }

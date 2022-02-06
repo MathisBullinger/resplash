@@ -20,8 +20,10 @@ export default function Mainnav() {
         <Page path="/" icon="img" label="home" active={page === 0} />
         <Page path="/favorites" icon="heart" active={page === 1} />
       </ul>
-      <ThemeToggle />
-      <LayoutToggle />
+      <div className="mainnav__prefs">
+        {page !== 1 && <LayoutToggle />}
+        <ThemeToggle />
+      </div>
     </nav>
   )
 }

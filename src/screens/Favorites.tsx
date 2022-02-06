@@ -5,7 +5,7 @@ import { useFavorites } from 'hooks/state'
 const Favorites = () => {
   const photos = useFavorites()
   return photos.length > 0 ? (
-    <Gallery photos={photos} modalPath="/favorites" />
+    <Gallery photos={photos} modalPath="/favorites" layout="mason" />
   ) : (
     <span className="no-favorites">
       You haven&apos;t favorited any photos yet.

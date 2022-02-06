@@ -5,11 +5,13 @@ import MasonGrid from './MasonGrid'
 import { useColumnCount } from 'hooks/layout'
 import Loader from './Loader'
 import { useAppState } from 'hooks/state'
+import type { Layout as LayoutName } from 'state/preferences'
 
 type Props = {
   photos: APIPhoto[]
   onScrollEnd?: () => void
   modalPath?: string
+  layout?: LayoutName
 }
 
 export type LayoutProps = Omit<Props, 'onScrollEnd'> & { columns: number }
@@ -18,7 +20,8 @@ export type Layout = React.FC<LayoutProps>
 const Gallery: React.FC<Props> = props => {
   const [container, setRef] = useState<HTMLElement | null>(null)
   const columns = useColumnCount(container)
-  const Layout = usePreferredLayout()
+  const prefLayout = useAppState(state => state.preferences.layout)
+  const Layout = (props.layout ?? prefLayout) === 'grid' ? FixedGrid : MasonGrid
 
   return (
     <div
@@ -35,8 +38,3 @@ const Gallery: React.FC<Props> = props => {
 }
 
 export default Gallery
-
-const usePreferredLayout = () =>
-  useAppState(state =>
-    state.preferences.layout === 'grid' ? FixedGrid : MasonGrid
-  )
