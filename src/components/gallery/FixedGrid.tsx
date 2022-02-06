@@ -5,6 +5,20 @@ import { take, repeat, partition, sequence } from 'utils/list'
 import Photo from './Photo'
 import bem from 'utils/bem'
 
+/* This is the photo gallery-layout *exactly* as it is visible in Figma:
+   alternating portrait- and landscape-photographs, each of the exact same
+   aspect-ratio and forming the lines of a perfect grid (each portrait-format
+   photo takes up two rows).
+   
+   This does mean however, that the photos are cropped to fit the same 
+   aspect-ratio and that some photos won't be displayed because for this layout
+   to work there must be the same number of portrait- and landscape-photographs. 
+   
+   For this reason, this layout is not available on the favorites page.
+   The reason why I've included this layout at all is so that I adhere to the
+   shared requirements as closely as possible and also can demonstrate the usage
+   of an actual grid-based layout in this app. */
+
 const Grid: Layout = ({ photos, columns }) => {
   const list = useStackSequenced(columns, photos)
 

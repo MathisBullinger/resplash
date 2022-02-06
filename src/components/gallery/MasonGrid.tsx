@@ -1,6 +1,16 @@
 import React, { useState } from 'react'
 import Photo from './Photo'
 
+/* This is the default masonry-style layout used in the photo gallery.
+   The photos are pushed - in the order in that they are served by the API -
+   on whichever column is the smallest.
+   So every column will be about the same height (difference within the height
+   of one photo) and the photos will be sorted top-top-bottom in the order in 
+   that they were handed to the client, but the photos won't form an actual grid
+   in the strict sense of the term. 
+   When adding or removing columns by resizing, the photos will be redistributed
+   to evenly cover all columns, but no particular order will be guaranteed. */
+
 import { useColumns } from 'hooks/layout'
 import type { LayoutProps as Props } from './Gallery'
 

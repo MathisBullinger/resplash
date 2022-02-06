@@ -8,7 +8,7 @@ module.exports = (_, argv) => {
   const IS_DEV = argv.mode === 'development'
 
   // text-replace any process.env.* variable at build time with the corresponding
-  // value found in the .env file if it exists, or othrerwise with the environment
+  // value found in the .env file if it exists or otherwise with the environment
   // variable of the same name
   const dotEnvPath = path.join(__dirname, '.env')
   const dotEnv = fs.existsSync(dotEnvPath)

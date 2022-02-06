@@ -7,6 +7,10 @@ import Loader from './Loader'
 import { useAppState } from 'hooks/state'
 import type { Layout as LayoutName } from 'state/preferences'
 
+/* There are two photo gallery-layouts that the user can switch between by
+   clicking a button in the main navigation. This component serves to decide
+   which layout to render. */
+
 type Props = {
   photos: APIPhoto[]
   onScrollEnd?: () => void

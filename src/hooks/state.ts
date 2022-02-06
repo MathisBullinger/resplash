@@ -15,7 +15,7 @@ export const useAppState: redux.TypedUseSelectorHook<
   handle all async data fetching logic centrally in the redux middleware layer.
   For simplicity's sake here I'll handle that logic directly in the hooks that
   are used to retrieve the different types of data. In this demo there really
-  are only two hooks that potentially need fetch data through the API anyway: 
+  are only two hooks that potentially need to fetch data through the API anyway: 
   usePhotos and usePhoto.
 */
 
