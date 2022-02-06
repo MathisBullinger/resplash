@@ -45,11 +45,11 @@ const formatImgData =
         image: data.user.profile_image.medium,
       },
       exif: {
-        aperture: data.exif?.aperture,
+        aperture: format('aperture', data.exif?.aperture),
         iso: data.exif?.iso,
-        focal: data.exif?.focal_length,
+        focal: format('focal', data.exif?.focal_length),
         exposure: data.exif?.exposure_time,
-        make: capitalize(data.exif?.make?.replace(/corp[a-z]*$/i, '')),
+        make: format('make', data.exif?.make),
         model: data.exif?.model,
       },
       source,
@@ -62,3 +62,14 @@ const formatImgData =
 
     return filtered
   }
+
+const formatters = {
+  make: (str: string) => capitalize(str.replace(/corp[a-z]*$/i, '')),
+  aperture: (str: string) => 'f/' + str.replace(/^\s*(f\/)?/, ''),
+  focal: (str: string) => (/\d$/.test(str) ? `${str}mm` : str),
+}
+
+const format = (key: keyof typeof formatters, value?: string) => {
+  if (typeof value !== 'string') return value
+  return formatters[key](value)
+}
