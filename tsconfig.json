@@ -7,8 +7,11 @@
     "esModuleInterop": true,
     "jsx": "react",
     "strict": true,
-    "baseUrl": "src"
+    "baseUrl": "./src",
+    "paths": {
+      "test/*": ["../test/*"]
+    }
   },
-  "include": ["src", "__tests__"],
+  "include": ["src", "test"],
   "exclude": ["node_modules", "build"]
 }
