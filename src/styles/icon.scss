@@ -3,7 +3,7 @@
   fill: none;
 }
 
-:is(.icon__logo, .icon__close) path {
+:is(.icon__logo, .icon__close, .icon__light) path {
   stroke: unset;
   fill: var(--cl-text);
 }

@@ -48,7 +48,7 @@ const formatImgData =
         aperture: format('aperture', data.exif?.aperture),
         iso: data.exif?.iso,
         focal: format('focal', data.exif?.focal_length),
-        exposure: data.exif?.exposure_time,
+        exposure: format('exposure', data.exif?.exposure_time),
         make: format('make', data.exif?.make),
         model: data.exif?.model,
       },
@@ -67,6 +67,7 @@ const formatters = {
   make: (str: string) => capitalize(str.replace(/corp[a-z]*$/i, '')),
   aperture: (str: string) => 'f/' + str.replace(/^\s*(f\/)?/, ''),
   focal: (str: string) => (/\d$/.test(str) ? `${str}mm` : str),
+  exposure: (str: string) => (/^\d+\/\d+$$/.test(str) ? `${str}s` : str),
 }
 
 const format = (key: keyof typeof formatters, value?: string) => {

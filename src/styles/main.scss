@@ -29,6 +29,15 @@
   height: 100%;
 }
 
+[data-theme='light'] {
+  --cl-back: #fff;
+  --cl-text: #000e;
+  --cl-text-medium: #000c;
+  --cl-text-light: #000b;
+  --cl-text-label: #0004;
+  --cl-surface: #eee;
+}
+
 body {
   margin: 0;
   height: 100%;
