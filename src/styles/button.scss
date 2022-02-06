@@ -52,3 +52,7 @@
   width: 1px;
   height: 1px;
 }
+
+.button--disabled {
+  pointer-events: none;
+}

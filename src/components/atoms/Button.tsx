@@ -7,16 +7,18 @@ import * as obj from 'utils/object'
 type BtProps = {
   onClick?: () => void
   linkTo?: string
-  className?: string
   icon?: Icon
   noText?: boolean
   accent?: boolean
-  title?: string
-}
+  disabled?: boolean
+} & React.HTMLProps<HTMLElement>
 
 const Button: React.FC<BtProps> = props => {
   const classes = [
-    bem('button', props.noText ? 'notext' : 'text', { accent: props.accent }),
+    bem('button', props.noText ? 'notext' : 'text', {
+      accent: props.accent,
+      disabled: props.disabled,
+    }),
   ]
   if (props.className) classes.push(props.className)
   const className = classes.join(' ')

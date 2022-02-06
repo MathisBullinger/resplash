@@ -43,6 +43,7 @@ const Page: React.FC<PageProps> = ({ icon, path, label, active }) => (
       noText
       className="mainnav__button"
       aria-current={active ? 'page' : undefined}
+      disabled={active}
     >
       {label ?? path.replace(/^\//, '')}
     </Button>
