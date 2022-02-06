@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 import Modal from 'components/atoms/Modal'
 import { useParams, useHistory } from 'react-router-dom'
 import { usePhoto } from 'hooks/state'
@@ -53,6 +53,7 @@ const ModalPhoto: React.FC<{ photo: Photo; anchorVert: boolean }> = ({
       height={photo.height}
       src={photo.urls.full}
       alt={photo.title}
+      style={{ '--color': photo.color } as CSSProperties}
     ></img>
   )
 }
