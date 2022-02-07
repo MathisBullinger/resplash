@@ -22,10 +22,13 @@
 }
 
 @media (hover: hover) {
-  .photo:hover .photo__like,
-  .photo__like[aria-pressed='true'] {
+  .photo:hover .photo__like {
     opacity: 1;
   }
+}
+
+.photo__like[aria-pressed='true'] {
+  opacity: 1;
 }
 
 .photo--cover {
