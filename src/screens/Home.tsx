@@ -4,9 +4,5 @@ import { usePhotos } from 'hooks/state'
 
 export default function Home() {
   const [photos, fetchMore] = usePhotos()
-  return (
-    <div>
-      <Gallery photos={photos} onScrollEnd={fetchMore} />
-    </div>
-  )
+  return <Gallery photos={photos} onScrollEnd={fetchMore} />
 }

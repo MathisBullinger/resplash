@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import Photo from './Photo'
+import { useColumns } from 'hooks/layout'
+import type { LayoutProps as Props } from './Gallery'
 
 /* This is the default masonry-style layout used in the photo gallery.
    The photos are pushed - in the order in that they are served by the API -
@@ -10,9 +12,6 @@ import Photo from './Photo'
    in the strict sense of the term. 
    When adding or removing columns by resizing, the photos will be redistributed
    to evenly cover all columns, but no particular order will be guaranteed. */
-
-import { useColumns } from 'hooks/layout'
-import type { LayoutProps as Props } from './Gallery'
 
 const Grid: React.FC<Props> = props => {
   const columns = useColumns(props.columns, props.photos)
